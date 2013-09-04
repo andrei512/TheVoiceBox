@@ -29,9 +29,14 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
-    puts post_params
+  def create      
+
+    
     @post = Post.new(post_params)
+
+    if @post.user_id != current_user.id
+      render status: :internal_server_error
+    end
 
     if @post.upvotes - @post.downvotes > 1
       render status: :internal_server_error
