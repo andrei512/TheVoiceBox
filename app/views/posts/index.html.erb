@@ -5,9 +5,15 @@
       <tr>
         <td>
           <div style="vertical-align: middle;">          
-            <div><a href="#">&#x25b2;</a></div>
-            <div><strong><%= post.upvotes - post.downvotes %></strong></div>
-            <div><a href="#">&#x25bc;</a></div>            
+            <div>
+              <%= link_to '&#x25b2;'.html_safe, upvote_path(post_id: post.id), remote: true %>
+            </div>
+            <div id="votes-<%= post.id %>">
+              <strong><%= "#{post.value > 0 ? "+" : ""}#{post.value}" %></strong>
+            </div>
+            <div>
+              <%= link_to '&#x25bc;'.html_safe, downvote_path(post_id: post.id), remote: true %>
+            </div>            
           </div>
         </td>
         <td> </td>
@@ -17,7 +23,7 @@
               <%=raw BlueCloth.new(post.text).to_html %>
             </div>
             <div>
-              by <strong><%= post.user.username %></strong>
+              by <%= link_to post.user.username, post.user %>
             </div>
           </div>
         </td>
@@ -34,8 +40,6 @@
         <li class="nav-header">New Post</li>
         <%  @post = Post.new
             @post.user = current_user
-            @post.upvotes = 0
-            @post.downvotes = 0          
          %>
         <%= render 'form' %>
       </ul>

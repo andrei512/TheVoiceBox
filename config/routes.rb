@@ -2,7 +2,10 @@ TheVoiceBox::Application.routes.draw do
   root to: "posts#index"
 
   resources :posts
+
   get 'fresh-posts' => 'posts#fresh', as: "fresh"
+  get 'posts/:post_id/upvote' => 'votes#upvote', as: 'upvote'
+  get 'posts/:post_id/downvote' => 'votes#downvote', as: 'downvote'
 
   devise_for :users
 
