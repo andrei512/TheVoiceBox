@@ -2,6 +2,7 @@ TheVoiceBox::Application.routes.draw do
   root to: "posts#index"
 
   resources :posts
+  get 'fresh-posts' => 'posts#fresh', as: "fresh"
 
   devise_for :users
 

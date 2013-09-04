@@ -1,7 +1,6 @@
 <div class="span9">
-  <h1>Listing posts</h1>
-
-  <table>
+  
+  <table class="table">
     <% @posts.each do |post| %>
       <tr>
         <td>
@@ -12,19 +11,35 @@
           </div>
         </td>
         <td> </td>
-        <td><%=raw BlueCloth.new(post.text).to_html %></td>
-      </tr>
+        <td>
+          <div style="vertical-align: left;">
+            <div>
+              <%=raw BlueCloth.new(post.text).to_html %>
+            </div>
+            <div>
+              by <strong><%= post.user.username %></strong>
+            </div>
+          </div>
+        </td>
+      </tr>      
     <% end %>
   </table>
 </div>
 
 
 <div class="span3">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">Sidebar</li>
-      <li><%= link_to 'New Post', new_post_path %></li>      
-    </ul>
-  </div>
+  <% if user_signed_in? %>
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">New Post</li>
+        <%  @post = Post.new
+            @post.user = current_user
+            @post.upvotes = 0
+            @post.downvotes = 0          
+         %>
+        <%= render 'form' %>
+      </ul>
+    </div>  
+  <% end -%>
 </div>
 

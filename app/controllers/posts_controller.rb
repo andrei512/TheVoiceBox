@@ -7,6 +7,12 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def fresh
+    @posts = Post.order('created_at DESC').all
+    render :index
+  end
+
+
   # GET /posts/1
   # GET /posts/1.json
   def show
@@ -24,11 +30,16 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    puts post_params
     @post = Post.new(post_params)
+
+    if @post.upvotes - @post.downvotes > 1
+      render status: :internal_server_error
+    end
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to posts_path }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
