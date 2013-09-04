@@ -1,0 +1,21 @@
+<%- model_class = User -%>
+<% require 'digest/md5' %>
+
+
+<div class="row-fluid">
+  <div class="span2">
+    <%= image_tag("http://b.dryicons.com/images/icon_sets/colorful_stickers_part_3_icons_set/png/256x256/user.png", size: "128x128") %>
+  </div>
+  <div class="span3">
+    <h1><%= @user.username.titleize %></h1>
+  </div>
+</div>
+
+<dl class="dl-horizontal">
+  <dd>Last seen <%= time_ago_in_words @user.last_sign_in_at %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              users_path, :class => 'btn'  %>
+</div>
