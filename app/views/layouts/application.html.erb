@@ -46,7 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">TheVoiceBox</a>
+          <a class="brand" href="<%= root_path %>">TheVoiceBox</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Top", "/path1"  %></li>
@@ -54,6 +54,11 @@
               <li><%= link_to "Best", "/path3"  %></li>
               <li><%= link_to "About", "/path3"  %></li>
               <li><%= link_to "Users", "/users/"  %></li>
+              <% if user_signed_in? %>
+              <li><%= link_to "Logout", "/users/sign_out"  %></li>     
+              <% else %>
+              <li><%= link_to "Login", "/users/sign_in"  %></li>                              
+              <% end -%>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
