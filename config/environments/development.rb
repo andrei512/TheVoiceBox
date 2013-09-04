@@ -23,14 +23,6 @@ TheVoiceBox::Application.configure do
   config.active_record.migration_error = :page_load
 
   config.action_mailer.default_url_options = { :host => '0.0.0.0:80' }
-  ActionMailer::Base.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    user_name: "noreply.thevoicebox@gmail.com",
-    password: "asdfPSRK312",
-    authentication: "plain",
-  }
 
 
   # Debug mode disables concatenation and preprocessing of assets.
