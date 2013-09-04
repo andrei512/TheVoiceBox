@@ -12,6 +12,8 @@ class VotesController < ApplicationController
     vote.value = +1;
 
     vote.save
+
+    render 'refresh_post' 
   end
 
   def downvote
@@ -22,6 +24,8 @@ class VotesController < ApplicationController
     vote.value = -1;
 
     vote.save
+
+    render 'refresh_post' 
   end
 
   private
